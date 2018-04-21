@@ -1,62 +1,31 @@
--------------------------------------------
-Source installation information for modders
--------------------------------------------
-This code follows the Minecraft Forge installation methodology. It will apply
-some small patches to the vanilla MCP source code, giving you and it access 
-to some of the data and functions you need to build a successful mod.
+Hello, you have come across my mod.
 
-Note also that the patches are built against "unrenamed" MCP source code (aka
-srgnames) - this means that you will not be able to read them directly against
-normal code.
+Story
 
-Source pack installation information:
+I started out with a bad idea - a mod that would let twitch users talk on the streamer's behalf, and I built it, and spent too much time on it, adding antiswear and a configurable whitelist.
 
-Standalone source installation
-==============================
+Info - What it Does
 
-See the Forge Documentation online for more detailed instructions:
-http://mcforge.readthedocs.io/en/latest/gettingstarted/
+This mod does one, simple thing. It allows users in the twitch chat (varying with whitelist configs) to run '!msay (text)', and it will make the streamer say whatever they put for text, though it must be configured correctly, and they must be on the whitelist, or it much be turned off.
 
-Step 1: Open your command-line and browse to the folder where you extracted the zip file.
+Info - How it Works
 
-Step 2: Once you have a command window up in the folder that the downloaded material was placed, type:
+This mod works by connecting to a specific twitch channel, supplied in the config, with a bot user (also supplied in the config), then looking for '!msay' in the chat, and when it sees it, it checks if it has a space in it, then it checks if it contains a swear work, and if it does, it is turned into 'Swear Detected from @(user)', (user) being the user that ran !msay. It then checks if the user is in the whitelist (if its on), and if it is, they send the message to the chat '@(user) -> (msg)', and if they are not, it does nothing.
 
-Windows: "gradlew setupDecompWorkspace"
-Linux/Mac OS: "./gradlew setupDecompWorkspace"
+Config
 
-Step 3: After all that finished, you're left with a choice.
-For eclipse, run "gradlew eclipse" (./gradlew eclipse if you are on Mac/Linux)
+MAIN CONFIG
 
-If you prefer to use IntelliJ, steps are a little different.
-1. Open IDEA, and import project.
-2. Select your build.gradle file and have it import.
-3. Once it's finished you must close IntelliJ and run the following command:
+To make this mod work, you MUST configure it. To do so, launch minecraft with the mod, then edit 'T2M.cfg' in the config folder. Replace 'CHANNEL' with the channel you want it to look for '!msay' on, 'USERNAME' with your bots username (you must make a new twitch account), and 'OAUTH' with your bot's OAUTH (to obtain it, visit twitchapps.com/tmi, authorize, and put in the supplied OAUTH).
 
-"gradlew genIntellijRuns" (./gradlew genIntellijRuns if you are on Mac/Linux)
+WHITELIST CONFIG
 
-Step 4: The final step is to open Eclipse and switch your workspace to /eclipse/ (if you use IDEA, it should automatically start on your project)
+To configure the whitelist, turn 'WhiteON' to true or false. If you set it to true, replace 'Whitelist' with all the twitch usernames you want to be able to use '!msay', and separate them with '*'s (ex. 'PintsizedSix40*xxiBlazze' would allow PintsizedSix40 and xxiBlazze to use it).
 
-If at any point you are missing libraries in your IDE, or you've run into problems you can run "gradlew --refresh-dependencies" to refresh the local cache. "gradlew clean" to reset everything {this does not affect your code} and then start the processs again.
+FINISH CONFIG
 
-Should it still not work, 
-Refer to #ForgeGradle on EsperNet for more information about the gradle environment.
+Good Job, now run '/rt2m' to reload the config, and your mod should work now!
 
-Tip:
-If you do not care about seeing Minecraft's source code you can replace "setupDecompWorkspace" with one of the following:
-"setupDevWorkspace": Will patch, deobfuscate, and gather required assets to run minecraft, but will not generate human readable source code.
-"setupCIWorkspace": Same as Dev but will not download any assets. This is useful in build servers as it is the fastest because it does the least work.
+USUAGE
 
-Tip:
-When using Decomp workspace, the Minecraft source code is NOT added to your workspace in a editable way. Minecraft is treated like a normal Library. Sources are there for documentation and research purposes and usually can be accessed under the 'referenced libraries' section of your IDE.
-
-Forge source installation
-=========================
-MinecraftForge ships with this code and installs it as part of the forge
-installation process, no further action is required on your part.
-
-LexManos' Install Video
-=======================
-https://www.youtube.com/watch?v=8VEdtQLuLO0&feature=youtu.be
-
-For more details update more often refer to the Forge Forums:
-http://www.minecraftforge.net/forum/index.php/topic,14048.0.html
+To use the mod, you (the streamer) must have it installed, and configured correctly. Now, tell your users on the whitelist (or everyone you want to know, if there is no whitelist) how to use it '!msay (text)'. If I ran that, whoever had the mod and had it set to the channel I was on, would say '@pintsizedsix40 -> (text)'.
