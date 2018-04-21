@@ -1,0 +1,16 @@
+[
+{
+  "modid": "twitchchatter",
+  "name": "TwitchChatter",
+  "description": "Allows you to send msgs to the mc chat from twitch commands.",
+  "version": "${version}",
+  "mcversion": "1.10.2",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["PintsizedSix40"],
+  "credits": "IDK",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
